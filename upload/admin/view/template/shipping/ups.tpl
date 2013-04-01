@@ -18,7 +18,8 @@
         <div class="control-group">
           <label class="control-label" for="input-name"><span class="required">*</span> <?php echo $entry_key; ?></label>
           <div class="controls">
-            <input type="text" name="ups_key" value="<?php echo $ups_key; ?>" />
+            <input type="text" name="ups_key" value="<?php echo $ups_key; ?>" placeholder="<?php echo $entry_key; ?>" />
+            <span class="help-block"><?php echo $help_key; ?></span>
             <?php if ($error_key) { ?>
             <span class="error"><?php echo $error_key; ?></span>
             <?php } ?>
@@ -27,7 +28,8 @@
         <div class="control-group">
           <label class="control-label" for="input-name"><span class="required">*</span> <?php echo $entry_username; ?></label>
           <div class="controls">
-            <input type="text" name="ups_username" value="<?php echo $ups_username; ?>" />
+            <input type="text" name="ups_username" value="<?php echo $ups_username; ?>" placeholder="<?php echo $entry_username; ?>" />
+            <span class="help-block"><?php echo $help_username; ?></span>
             <?php if ($error_username) { ?>
             <span class="error"><?php echo $error_username; ?></span>
             <?php } ?>
@@ -36,7 +38,8 @@
         <div class="control-group">
           <label class="control-label" for="input-name"><span class="required">*</span> <?php echo $entry_password; ?></label>
           <div class="controls">
-            <input type="text" name="ups_password" value="<?php echo $ups_password; ?>" />
+            <input type="text" name="ups_password" value="<?php echo $ups_password; ?>" placeholder="<?php echo $entry_password; ?>" />
+            <span class="help-block"><?php echo $help_password; ?></span>
             <?php if ($error_password) { ?>
             <span class="error"><?php echo $error_password; ?></span>
             <?php } ?>
@@ -54,7 +57,7 @@
               <?php } ?>
               <?php } ?>
             </select>
-          </div>
+            <span class="help-block"><?php echo $help_pickup; ?></span> </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="input-name"><?php echo $entry_packaging; ?></label>
@@ -68,7 +71,7 @@
               <?php } ?>
               <?php } ?>
             </select>
-          </div>
+            <span class="help-block"><?php echo $help_packaging; ?></span> </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="input-name"><?php echo $entry_classification; ?></label>
@@ -82,7 +85,7 @@
               <?php } ?>
               <?php } ?>
             </select>
-          </div>
+            <span class="help-block"><?php echo $help_classification; ?></span> </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="input-name"><?php echo $entry_origin; ?></label>
@@ -96,12 +99,13 @@
               <?php } ?>
               <?php } ?>
             </select>
-          </div>
+            <span class="help-block"><?php echo $help_origin; ?></span> </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="input-name"><span class="required">*</span> <?php echo $entry_city; ?></label>
           <div class="controls">
-            <input type="text" name="ups_city" value="<?php echo $ups_city; ?>" />
+            <input type="text" name="ups_city" value="<?php echo $ups_city; ?>" placeholder="<?php echo $entry_city; ?>" />
+            <span class="help-block"><?php echo $help_city; ?></span>
             <?php if ($error_city) { ?>
             <span class="error"><?php echo $error_city; ?></span>
             <?php } ?>
@@ -110,7 +114,8 @@
         <div class="control-group">
           <label class="control-label" for="input-name"><span class="required">*</span> <?php echo $entry_state; ?></label>
           <div class="controls">
-            <input type="text" name="ups_state" value="<?php echo $ups_state; ?>" maxlength="2" size="4" />
+            <input type="text" name="ups_state" value="<?php echo $ups_state; ?>" placeholder="<?php echo $entry_state; ?>" maxlength="2" class="input-mini" />
+            <span class="help-block"><?php echo $help_state; ?></span>
             <?php if ($error_state) { ?>
             <span class="error"><?php echo $error_state; ?></span>
             <?php } ?>
@@ -119,7 +124,8 @@
         <div class="control-group">
           <label class="control-label" for="input-name"><span class="required">*</span> <?php echo $entry_country; ?></label>
           <div class="controls">
-            <input type="text" name="ups_country" value="<?php echo $ups_country; ?>" maxlength="2" size="4" />
+            <input type="text" name="ups_country" value="<?php echo $ups_country; ?>" placeholder="<?php echo $entry_country; ?>" maxlength="2" class="input-mini" />
+            <span class="help-block"><?php echo $help_country; ?></span>
             <?php if ($error_country) { ?>
             <span class="error"><?php echo $error_country; ?></span>
             <?php } ?>
@@ -129,7 +135,7 @@
           <label class="control-label" for="input-name"><?php echo $entry_postcode; ?></label>
           <div class="controls">
             <input type="text" name="ups_postcode" value="<?php echo $ups_postcode; ?>" />
-          </div>
+            <span class="help-block"><?php echo $help_postcode; ?></span> </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="input-name"><?php echo $entry_test; ?></label>
@@ -145,7 +151,7 @@
             <input type="radio" name="ups_test" value="0" checked="checked" />
             <?php echo $text_no; ?>
             <?php } ?>
-          </div>
+            <span class="help-block"><?php echo $help_test; ?></span> </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="input-name"><?php echo $entry_quote_type; ?></label>
@@ -159,7 +165,7 @@
               <?php } ?>
               <?php } ?>
             </select>
-          </div>
+            <span class="help-block"><?php echo $help_quote_type; ?></span> </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="input-name"><?php echo $entry_service; ?></label>
@@ -630,7 +636,7 @@
                   </div>
                 </div>
               </div>
-              <a onclick="$(this).parent().find(':checkbox').attr('checked', true);"><?php echo $text_select_all; ?></a> / <a onclick="$(this).parent().find(':checkbox').attr('checked', false);"><?php echo $text_unselect_all; ?></a></div>
+              <a onclick="$(this).parent().find(':checkbox').attr('checked', true);"><?php echo $text_select_all; ?></a> / <a onclick="$(this).parent().find(':checkbox').attr('checked', false);"><?php echo $text_unselect_all; ?></a> <span class="help-block"><?php echo $help_service; ?></span></div>
           </div>
         </div>
         <div class="control-group">
@@ -647,7 +653,7 @@
             <input type="radio" name="ups_insurance" value="0" checked="checked" />
             <?php echo $text_no; ?>
             <?php } ?>
-          </div>
+            <span class="help-block"><?php echo $help_insurance; ?></span> </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="input-name"><?php echo $entry_display_weight; ?></label>
@@ -677,7 +683,7 @@
               <?php } ?>
               <?php } ?>
             </select>
-          </div>
+            <span class="help-block"><?php echo $help_weight_class; ?></span> </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="input-name"><?php echo $entry_length_class; ?></label>
@@ -691,14 +697,15 @@
               <?php } ?>
               <?php } ?>
             </select>
-          </div>
+            <span class="help-block"><?php echo $help_length_class; ?></span> </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="input-name"><span class="required">*</span> <?php echo $entry_dimension; ?></label>
           <div class="controls">
-            <input type="text" name="ups_length" value="<?php echo $ups_length; ?>" size="4" />
-            <input type="text" name="ups_width" value="<?php echo $ups_width; ?>" size="4" />
-            <input type="text" name="ups_height" value="<?php echo $ups_height; ?>" size="4" />
+            <input type="text" name="ups_length" value="<?php echo $ups_length; ?>" placeholder="<?php echo $entry_length; ?>" class="input-mini" />
+            <input type="text" name="ups_width" value="<?php echo $ups_width; ?>" placeholder="<?php echo $entry_width; ?>" class="input-mini" />
+            <input type="text" name="ups_height" value="<?php echo $ups_height; ?>" placeholder="<?php echo $entry_height; ?>" class="input-mini" />
+            <span class="help-block"><?php echo $help_dimension; ?></span>
             <?php if ($error_dimension) { ?>
             <span class="error"><?php echo $error_dimension; ?></span>
             <?php } ?>
@@ -751,7 +758,7 @@
         <div class="control-group">
           <label class="control-label" for="input-name"><?php echo $entry_sort_order; ?></label>
           <div class="controls">
-            <input type="text" name="ups_sort_order" value="<?php echo $ups_sort_order; ?>" size="1" />
+            <input type="text" name="ups_sort_order" value="<?php echo $ups_sort_order; ?>" placeholder="<?php echo $entry_sort_order; ?>" class="input-mini" />
           </div>
         </div>
         <div class="control-group">
@@ -766,7 +773,7 @@
               <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
               <?php } ?>
             </select>
-          </div>
+            <span class="help-block"><?php echo $help_debug; ?></span> </div>
         </div>
       </form>
     </div>
