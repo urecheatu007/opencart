@@ -18,13 +18,15 @@
         <div class="control-group">
           <label class="control-label" for="input-name"><?php echo $entry_rate; ?></label>
           <div class="controls">
-            <textarea name="parcelforce_48_rate" cols="40" rows="5"><?php echo $parcelforce_48_rate; ?></textarea>
+            <textarea name="parcelforce_48_rate" cols="40" rows="5" placeholder="<?php echo $entry_rate; ?>"><?php echo $parcelforce_48_rate; ?></textarea>
+            <span class="help-block"><?php echo $help_rate; ?></span>
           </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="input-name"><?php echo $entry_insurance; ?></label>
           <div class="controls">
-            <textarea name="parcelforce_48_insurance" cols="40" rows="5"><?php echo $parcelforce_48_insurance; ?></textarea>
+            <textarea name="parcelforce_48_insurance" cols="40" rows="5" placeholder="<?php echo $entry_insurance; ?>"><?php echo $parcelforce_48_insurance; ?></textarea>
+            <span class="help-block"><?php echo $help_insurance; ?></span>
           </div>
         </div>
         <div class="control-group">
@@ -41,6 +43,8 @@
             <input type="radio" name="parcelforce_48_display_weight" value="0" checked="checked" />
             <?php echo $text_no; ?>
             <?php } ?>
+            <span class="help-block"><?php echo $help_display_weight; ?></span>
+            
           </div>
         </div>
         <div class="control-group">
@@ -57,6 +61,8 @@
             <input type="radio" name="parcelforce_48_display_insurance" value="0" checked="checked" />
             <?php echo $text_no; ?>
             <?php } ?>
+            
+            <span class="help-block"><?php echo $help_display_insurance; ?></span>
           </div>
         </div>
         <div class="control-group">
@@ -73,6 +79,8 @@
             <input type="radio" name="parcelforce_48_display_time" value="0" checked="checked" />
             <?php echo $text_no; ?>
             <?php } ?>
+            
+            <span class="help-block"><?php echo $help_display_time; ?></span>
           </div>
         </div>
         <div class="control-group">
@@ -120,9 +128,9 @@
           </div>
         </div>
         <div class="control-group">
-          <label class="control-label" for="input-name"></label>
-          <div class="controls"><?php echo $entry_sort_order; ?>
-            <input type="text" name="parcelforce_48_sort_order" value="<?php echo $parcelforce_48_sort_order; ?>" size="1" />
+          <label class="control-label" for="input-name"><?php echo $entry_sort_order; ?></label>
+          <div class="controls">
+            <input type="text" name="parcelforce_48_sort_order" value="<?php echo $parcelforce_48_sort_order; ?>" placeholder="<?php echo $entry_sort_order; ?>" class="input-mini" />
           </div>
         </div>
       </form>

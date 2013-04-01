@@ -26,7 +26,7 @@
             <div class="control-group">
               <label class="control-label" for="input-name"><span class="required">*</span> <?php echo $entry_name; ?></label>
               <div class="controls">
-                <input name="name" value="<?php echo $name; ?>" />
+                <input type="text" name="name" value="<?php echo $name; ?>" placeholder="<?php echo $entry_name; ?>" />
                 <?php if ($error_name) { ?>
                 <span class="error"><?php echo $error_name; ?></span>
                 <?php } ?>
@@ -35,7 +35,8 @@
             <div class="control-group">
               <label class="control-label" for="input-name"><span class="required">*</span> <?php echo $entry_code; ?></label>
               <div class="controls">
-                <input type="text" name="code" value="<?php echo $code; ?>" />
+                <input type="text" name="code" value="<?php echo $code; ?>" placeholder="<?php echo $entry_code; ?>" />
+                <span class="help-block"><?php echo $help_code; ?></span>
                 <?php if ($error_code) { ?>
                 <span class="error"><?php echo $error_code; ?></span>
                 <?php } ?>
@@ -56,19 +57,19 @@
                   <option value="F"><?php echo $text_amount; ?></option>
                   <?php } ?>
                 </select>
-              </div>
+                <span class="help-block"><?php echo $help_type; ?></span></div>
             </div>
             <div class="control-group">
               <label class="control-label" for="input-name"><?php echo $entry_discount; ?></label>
               <div class="controls">
-                <input type="text" name="discount" value="<?php echo $discount; ?>" />
+                <input type="text" name="discount" value="<?php echo $discount; ?>" placeholder="<?php echo $entry_discount; ?>" />
               </div>
             </div>
             <div class="control-group">
               <label class="control-label" for="input-name"><?php echo $entry_total; ?></label>
               <div class="controls">
-                <input type="text" name="total" value="<?php echo $total; ?>" />
-              </div>
+                <input type="text" name="total" value="<?php echo $total; ?>" placeholder="<?php echo $entry_total; ?>" />
+                <span class="help-block"><?php echo $help_total; ?></span></div>
             </div>
             <div class="control-group">
               <label class="control-label" for="input-name"><?php echo $entry_logged; ?></label>
@@ -84,7 +85,7 @@
                 <input type="radio" name="logged" value="0" checked="checked" />
                 <?php echo $text_no; ?>
                 <?php } ?>
-              </div>
+                <span class="help-block"><?php echo $help_logged; ?></span></div>
             </div>
             <div class="control-group">
               <label class="control-label" for="input-name"><?php echo $entry_shipping; ?></label>
@@ -105,7 +106,8 @@
             <div class="control-group">
               <label class="control-label" for="input-name"><?php echo $entry_product; ?></label>
               <div class="controls">
-                <input type="text" name="product" value="" />
+                <input type="text" name="product" value="" placeholder="<?php echo $entry_product; ?>"  />
+                <span class="help-block"><?php echo $help_product; ?></span>
                 <div id="coupon-product" class="scrollbox">
                   <?php $class = 'odd'; ?>
                   <?php foreach ($coupon_product as $coupon_product) { ?>
@@ -120,7 +122,8 @@
             <div class="control-group">
               <label class="control-label" for="input-name"><?php echo $entry_category; ?></label>
               <div class="controls">
-                <input type="text" name="category" value="" />
+                <input type="text" name="category" value="" placeholder="<?php echo $entry_category; ?>" />
+                <span class="help-block"><?php echo $help_category ?></span>
                 <div id="coupon-category" class="scrollbox">
                   <?php $class = 'odd'; ?>
                   <?php foreach ($coupon_category as $coupon_category) { ?>
@@ -135,26 +138,26 @@
             <div class="control-group">
               <label class="control-label" for="input-name"><?php echo $entry_date_start; ?></label>
               <div class="controls">
-                <input type="text" name="date_start" value="<?php echo $date_start; ?>" size="12" id="date-start" />
+                <input type="text" name="date_start" value="<?php echo $date_start; ?>" placeholder="<?php echo $entry_date_start; ?>" class="input-small" id="date-start" />
               </div>
             </div>
             <div class="control-group">
               <label class="control-label" for="input-name"><?php echo $entry_date_end; ?></label>
               <div class="controls">
-                <input type="text" name="date_end" value="<?php echo $date_end; ?>" size="12" id="date-end" />
+                <input type="text" name="date_end" value="<?php echo $date_end; ?>" placeholder="<?php echo $entry_date_end; ?>" class="input-small" id="date-end" />
               </div>
             </div>
             <div class="control-group">
               <label class="control-label" for="input-name"><?php echo $entry_uses_total; ?></label>
               <div class="controls">
-                <input type="text" name="uses_total" value="<?php echo $uses_total; ?>" />
-              </div>
+                <input type="text" name="uses_total" value="<?php echo $uses_total; ?>" placeholder="<?php echo $entry_uses_total; ?>" />
+                <span class="help-block"><?php echo $help_uses_total; ?></span></div>
             </div>
             <div class="control-group">
               <label class="control-label" for="input-name"><?php echo $entry_uses_customer; ?></label>
               <div class="controls">
-                <input type="text" name="uses_customer" value="<?php echo $uses_customer; ?>" />
-              </div>
+                <input type="text" name="uses_customer" value="<?php echo $uses_customer; ?>" placeholder="<?php echo $entry_uses_customer; ?>" />
+                <span class="help-block"><?php echo $help_uses_customer; ?></span></div>
             </div>
             <div class="control-group">
               <label class="control-label" for="input-name"><?php echo $entry_status; ?></label>
