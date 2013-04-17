@@ -9,7 +9,7 @@
   <div class="alert alert-error"><i class="icon-exclamation-sign"></i> <?php echo $error_warning; ?></div>
   <?php } ?>
   <div class="box">
-    <div class="box-heading">
+    <div class="page-header">
       <h1><i class="icon-edit"></i> <?php echo $heading_title; ?></h1>
     </div>
     <div class="box-content">
@@ -29,7 +29,7 @@
             <div class="tab-content">
               <?php foreach ($languages as $language) { ?>
               <div class="tab-pane" id="language<?php echo $language['language_id']; ?>">
-                <div class="control-group">
+                <div class="control-group required">
                   <label class="control-label" for="input-name<?php echo $language['language_id']; ?>"><span class="required">*</span> <?php echo $entry_name; ?></label>
                   <div class="controls">
                     <input type="text" name="category_description[<?php echo $language['language_id']; ?>][name]" value="<?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['name'] : ''; ?>" placeholder="<?php echo $entry_name; ?>" id="input-name<?php echo $language['language_id']; ?>" class="input-xxlarge" />
@@ -72,12 +72,10 @@
               <label class="control-label" for="input-filter"><?php echo $entry_filter; ?></label>
               <div class="controls">
                 <input type="text" name="filter" value="" placeholder="<?php echo $entry_filter; ?>" id="input-filter" />
-                <span class="help-block"><?php echo $help_filter; ?></span>
+                <a data-toggle="tooltip"><?php echo $help_filter; ?></a>
                 <div id="category-filter">
-                  <?php $class = 'odd'; ?>
                   <?php foreach ($category_filters as $category_filter) { ?>
-                  <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
-                  <div id="category-filter<?php echo $category_filter['filter_id']; ?>" class="<?php echo $class; ?>"><?php echo $category_filter['name']; ?><img src="view/image/icon-delete.png" alt="" />
+                  <div id="category-filter<?php echo $category_filter['filter_id']; ?>"><?php echo $category_filter['name']; ?><img src="view/image/icon-delete.png" alt="" />
                     <input type="hidden" name="category_filter[]" value="<?php echo $category_filter['filter_id']; ?>" />
                   </div>
                   <?php } ?>
@@ -113,37 +111,69 @@
               <label class="control-label" for="input-keyword"><?php echo $entry_keyword; ?></label>
               <div class="controls">
                 <input type="text" name="keyword" value="<?php echo $keyword; ?>" placeholder="<?php echo $entry_keyword; ?>" id="input-keyword" />
+                <i id="help-keyword" class="icon-question-sign"></i> 
                 <script type="text/javascript"><!--
-                $('#input-keyword').tooltip({'title': '<?php echo addslashes($help_keyword); ?>', trigger: 'focus'});
+                $('#help-keyword').tooltip({'title': '<?php echo addslashes($help_keyword); ?>', trigger: 'hover'});
                 //--></script> 
               </div>
             </div>
             <div class="control-group">
               <label class="control-label" for="input-name"><?php echo $entry_image; ?></label>
               <div class="controls">
-                <div class="image"><img src="<?php echo $thumb; ?>" alt="" id="thumb" class="img-polaroid" />
+                
+            
+                
+                <img src="<?php echo $thumb; ?>" alt="" id="thumb" class="img-polaroid" />
+                  
+                   <br /><br />
+                  <div class="btn-group">
+<button class="btn btn-small"><i class="icon-edit"></i></button>
+<button class="btn btn-small"><i class="icon-remove"></i></button>
+</div>               
+ 
+                  
                   <input type="hidden" name="image" value="<?php echo $image; ?>" id="image" />
-                  <br />
-                  <a onclick="image_upload('image', 'thumb');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('#thumb').attr('src', '<?php echo $no_image; ?>'); $('#image').attr('value', '');"><?php echo $text_clear; ?></a></div>
+                  
+                  
+                 
+                  
+                  
+                  
+
+                  
+                  
+                  <a onclick="image_upload('image', 'thumb');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('#thumb').attr('src', '<?php echo $no_image; ?>'); $('#image').attr('value', '');"><?php echo $text_clear; ?></a>
+                  
+                  
+                  
+                 
               </div>
             </div>
             <div class="control-group">
               <label class="control-label" for="input-top"><?php echo $entry_top; ?></label>
               <div class="controls">
-                <label class="checkbox">
+                <label class="checkbox inline">
                   <?php if ($top) { ?>
                   <input type="checkbox" name="top" value="1" checked="checked" id="input-top" />
                   <?php } else { ?>
                   <input type="checkbox" name="top" value="1" id="input-top" />
                   <?php } ?>
                 </label>
-                <span class="help-block"><?php echo $help_top; ?></span></div>
+                <i id="help-top" class="icon-question-sign"></i> 
+                <script type="text/javascript"><!--
+                $('#help-top').tooltip({'title': '<?php echo addslashes($help_top); ?>', trigger: 'hover'});
+                //--></script> 
+              </div>
             </div>
             <div class="control-group">
               <label class="control-label" for="input-column"><?php echo $entry_column; ?></label>
               <div class="controls">
                 <input type="text" name="column" value="<?php echo $column; ?>" placeholder="<?php echo $entry_column; ?>" id="input-column" class="input-mini" />
-                <span class="help-block"><?php echo $help_column; ?></span></div>
+                <i id="help-column" class="icon-question-sign"></i> 
+                <script type="text/javascript"><!--
+                $('#help-column').tooltip({'title': '<?php echo addslashes($help_column); ?>', trigger: 'hover'});
+                //--></script> 
+              </div>
             </div>
             <div class="control-group">
               <label class="control-label" for="input-sort-order"><?php echo $entry_sort_order; ?></label>
@@ -209,7 +239,7 @@
             </table>
           </div>
         </div>
-        <div class="buttons">
+        <div class="form-actions">
           <button type="submit" class="btn btn-primary"><i class="icon-ok"></i> <?php echo $button_save; ?></button>
           <a href="<?php echo $cancel; ?>" class="btn"><i class="icon-remove"></i> <?php echo $button_cancel; ?></a></div>
       </form>
@@ -232,29 +262,37 @@ CKEDITOR.replace('input-description<?php echo $language['language_id']; ?>', {
 <script type="text/javascript"><!--
 $('input[name=\'path\']').typeahead({
 	source: function(query, process) {
-		
-		
 		$.ajax({
-			url: 'index.php?route=catalog/category/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(this.value),
-			dataType: 'json',
+			url: 'index.php?route=catalog/category/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(query),
+			dataType: 'html',
 			success: function(json) {
+				/*
 				json.unshift({
 					'category_id':  0,
 					'name':  '<?php echo $text_none; ?>'
 				});
 				
+			
+				data = [];
 				
-				process(json);	
-				/*
-					return {
-						label: item.name,
-						value: item.category_id
-					}
-					*/				
+				for () {
+					
+				}
+			
+				process(JSON.parse(json));	
+				*/
+									
 			}
 		});		
 		
 		
+	},
+	"key": "city", 
+    "value": "code", 	
+	updater: function (item) {
+    	selectedState = map[item].stateCode;
+   		
+		return item;
 	}
 })
 /*
