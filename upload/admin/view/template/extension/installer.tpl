@@ -6,7 +6,7 @@
     <?php } ?>
   </ul>
   <?php if ($error_warning) { ?>
-  <div class="alert alert-error"><i class="icon-exclamation-sign"></i> <?php echo $error_warning; ?></div>
+  <div class="alert alert-error"><i class="icon-exclamation-sign"></i> <?php echo $error_warning; ?> <button type="button" class="close" data-dismiss="alert">&times;</button></div>
   <?php } ?>
   <div class="box">
     <div class="box-heading">
@@ -18,7 +18,11 @@
           <label class="control-label" for="button-upload"><?php echo $entry_upload; ?></label>
           <div class="controls">
             <button type="button" id="button-upload" class="btn" onclick="$('input[name=\'file\']').click();"><i class="icon-upload"></i> <?php echo $button_upload; ?></button>
-            <span class="help-block"><?php echo $help_upload; ?></span></div>
+
+            
+            <a data-toggle="tooltip" title="<?php echo $help_upload; ?>"><i class="icon-question-sign icon-large"></i></a>
+            
+            </div>
         </div>
         <div class="control-group">
           <div class="control-label"><?php echo $entry_progress; ?></div>
@@ -47,11 +51,11 @@ $('#file').on('change', function() {
 		data: new FormData($(this).parent()[0]),
 		beforeSend: function() {
 			$('#button-upload i').replaceWith('<i class="icon-spinner icon-spin"></i>');
-			$('#button-upload').attr('disabled', true);
+			$('#button-upload').prop('disabled', true);
 		},	
 		complete: function() {
 			$('#button-upload i').replaceWith('<i class="icon-upload"></i>');
-			$('#button-upload').attr('disabled', false);
+			$('#button-upload').prop('disabled', false);
 		},		
 		success: function(html) {
 			$('#output').html(html);
@@ -93,11 +97,11 @@ function unzip(file) {
 		data: new FormData($(this).parent()[0]),
 		beforeSend: function() {
 			$('#button-upload i').replaceWith('<i class="icon-spinner"></i>');
-			$('#button-upload').attr('disabled', true);
+			$('#button-upload').prop('disabled', true);
 		},	
 		complete: function() {
 			$('#button-upload i').replaceWith('<i class="icon-upload"></i>');
-			$('#button-upload').attr('disabled', false);
+			$('#button-upload').prop('disabled', false);
 		},		
 		success: function(html) {
 			$('#output').html(html);
