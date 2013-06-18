@@ -13,9 +13,12 @@
   <div class="box">
     <div class="box-heading">
       <h1><i class="icon-edit"></i> <?php echo $heading_title; ?></h1>
+      <div class="buttons">
+        <button type="submit" form="form-category" class="btn btn-primary"><i class="icon-ok"></i> <?php echo $button_save; ?></button>
+        <a href="<?php echo $cancel; ?>" class="btn"><i class="icon-remove"></i> <?php echo $button_cancel; ?></a></div>
     </div>
     <div class="box-content">
-      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form-category" class="form-horizontal">
         <ul class="nav nav-tabs">
           <li class="active"><a href="#tab-general" data-toggle="tab"><?php echo $tab_general; ?></a></li>
           <li><a href="#tab-data" data-toggle="tab"><?php echo $tab_data; ?></a></li>
@@ -31,7 +34,7 @@
             <div class="tab-content">
               <?php foreach ($languages as $language) { ?>
               <div class="tab-pane" id="language<?php echo $language['language_id']; ?>">
-                <div class="control-group error required">
+                <div class="control-group required">
                   <label class="control-label" for="input-name<?php echo $language['language_id']; ?>"><?php echo $entry_name; ?></label>
                   <div class="controls">
                     <input type="text" name="category_description[<?php echo $language['language_id']; ?>][name]" value="<?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['name'] : ''; ?>" placeholder="<?php echo $entry_name; ?>" id="input-name<?php echo $language['language_id']; ?>" class="input-xxlarge" />
@@ -71,10 +74,9 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label" for="input-filter"><?php echo $entry_filter; ?></label>
+              <label class="control-label" for="input-filter"><?php echo $entry_filter; ?> <span class="help-block"><?php echo $help_filter; ?></span></label>
               <div class="controls">
                 <input type="text" name="filter" value="" placeholder="<?php echo $entry_filter; ?>" id="input-filter" />
-                <a data-toggle="tooltip" title="<?php echo $help_filter; ?>"><i class="icon-info-sign"></i></a> <br />
                 <br />
                 <div id="category-filter" class="well well-small scrollbox">
                   <?php foreach ($category_filters as $category_filter) { ?>
@@ -110,47 +112,38 @@
                 <?php } ?>
               </div>
             </div>
-            <div class="control-group">
-              <label class="control-label" for="input-keyword"><?php echo $entry_keyword; ?></label>
+            <div class="control-group has-error">
+              <label class="control-label" for="input-keyword"><?php echo $entry_keyword; ?> <span class="help-block"><?php echo $help_keyword; ?></span></label>
               <div class="controls">
                 <input type="text" name="keyword" value="<?php echo $keyword; ?>" placeholder="<?php echo $entry_keyword; ?>" id="input-keyword" />
-                <a data-toggle="tooltip" title="<?php echo $help_keyword; ?>"><i class="icon-info-sign"></i></a></div>
+              </div>
             </div>
             <div class="control-group">
               <label class="control-label" for="input-name"><?php echo $entry_image; ?></label>
               <div class="controls">
-                <ul class="thumbnails">
-                  <li><a class="thumbnail" href="#"><img alt="" src="<?php echo $thumb; ?>"></a>
-                    <ul class="thumbnail-option">
-                      <li><a href="#" title="Edit"><span class="icon-edit"></span></a></li>
-                      <li><a href="#" title="Delete"><span class="icon-trash"></span></a></li>
-                    </ul>
-                  </li>
-                </ul>
-                <div class="btn-group">
-                  <button data-toggle="modal" data-target="#modal" class="btn btn-small"><i class="icon-edit"></i></button>
-                  <button onclick="$('#thumb').attr('src', '<?php echo $no_image; ?>'); $('#image').attr('value', '');" class="btn btn-small"><i class="icon-remove"></i></button>
+                <div class="image"> <img src="<?php echo $thumb; ?>" alt="" class="img-polaroid" />
+                  <input type="hidden" name="image" value="<?php echo $image; ?>" />
+                  <div class="image-option"><a href="#" title="<?php echo $button_edit; ?>" data-toggle="modal" data-target="#modal"><span class="icon-pencil"></span></a> <a href="#" title="<?php echo $button_clear; ?>" onclick="$(this).parent().parent().find('img').attr('src', '<?php echo $no_image; ?>'); $(this).parent().parent().find('input').attr('value', ''); return false;"><span class="icon-trash"></span></a></div>
                 </div>
-                <input type="hidden" name="image" value="<?php echo $image; ?>" id="image" />
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label" for="input-top"><?php echo $entry_top; ?></label>
+              <label class="control-label" for="input-top"><?php echo $entry_top; ?> <span class="help-block"><?php echo $help_top; ?></span></label>
               <div class="controls">
-                <label class="checkbox inline">
+                <label class="checkbox">
                   <?php if ($top) { ?>
                   <input type="checkbox" name="top" value="1" checked="checked" id="input-top" />
                   <?php } else { ?>
                   <input type="checkbox" name="top" value="1" id="input-top" />
                   <?php } ?>
                 </label>
-                <a data-toggle="tooltip" data-original-title="<?php echo $help_top; ?>"><i class="icon-info-sign"></i></a></div>
+              </div>
             </div>
             <div class="control-group">
-              <label class="control-label" for="input-column"><?php echo $entry_column; ?></label>
+              <label class="control-label" for="input-column"><?php echo $entry_column; ?> <span class="help-block"><?php echo $help_column; ?></span> </label>
               <div class="controls">
                 <input type="text" name="column" value="<?php echo $column; ?>" placeholder="<?php echo $entry_column; ?>" id="input-column" class="input-mini" />
-                <a data-toggle="tooltip" title="<?php echo $help_column; ?>"><i class="icon-info-sign"></i></a></div>
+              </div>
             </div>
             <div class="control-group">
               <label class="control-label" for="input-sort-order"><?php echo $entry_sort_order; ?></label>
@@ -214,9 +207,6 @@
             </table>
           </div>
         </div>
-        <div class="form-actions">
-          <button type="submit" class="btn btn-primary"><i class="icon-ok"></i> <?php echo $button_save; ?></button>
-          <a href="<?php echo $cancel; ?>" class="btn"><i class="icon-remove"></i> <?php echo $button_cancel; ?></a></div>
       </form>
     </div>
   </div>
