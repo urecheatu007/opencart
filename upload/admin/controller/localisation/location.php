@@ -147,13 +147,13 @@ class ControllerLocalisationLocation extends Controller {
 		$this->data['breadcrumbs'] =   array();
 		
 		$this->data['breadcrumbs'][] =   array(
-			'text'      =>  $this->language->get('text_home'),
+			'text' =>  $this->language->get('text_home'),
 			'href' => $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL')
 		);
 		
 		$this->data['breadcrumbs'][] =   array(
-			'text'      =>  $this->language->get('heading_title'),
-			'href'      =>  $this->url->link('localisation/location', 'token=' . $this->session->data['token'] . $url, 'SSL')
+			'text' =>  $this->language->get('heading_title'),
+			'href' =>  $this->url->link('localisation/location', 'token=' . $this->session->data['token'] . $url, 'SSL')
 		);
 		
 		$this->data['insert'] = $this->url->link('localisation/location/insert',  'token=' . $this->session->data['token'] . $url, 'SSL');
@@ -274,8 +274,6 @@ class ControllerLocalisationLocation extends Controller {
 		$this->data['text_none'] = $this->language->get('text_none');
 		$this->data['text_geocode'] = $this->language->get('text_geocode'); 
 		$this->data['text_image_manager'] = $this->language->get('text_image_manager');
-		$this->data['text_browse'] = $this->language->get('text_browse');
-		$this->data['text_clear'] = $this->language->get('text_clear'); 
 				
 		$this->data['entry_name'] = $this->language->get('entry_name');
 		$this->data['entry_address_1'] = $this->language->get('entry_address_1');
@@ -296,7 +294,9 @@ class ControllerLocalisationLocation extends Controller {
 		$this->data['button_save'] = $this->language->get('button_save');
 		$this->data['button_cancel'] = $this->language->get('button_cancel');        
 		$this->data['button_geocode'] = $this->language->get('button_geocode');
-		
+		$this->data['button_edit'] = $this->language->get('button_edit');
+		$this->data['button_clear'] = $this->language->get('button_clear');
+				
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
 		} else {
