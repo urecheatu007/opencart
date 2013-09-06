@@ -175,6 +175,7 @@ class ControllerCatalogDownload extends Controller {
 			$action = array();
 						
 			$action[] = array(
+				'icon' => 'pencil',
 				'text' => $this->language->get('text_edit'),
 				'href' => $this->url->link('catalog/download/update', 'token=' . $this->session->data['token'] . '&download_id=' . $result['download_id'] . $url, 'SSL')
 			);
@@ -191,6 +192,7 @@ class ControllerCatalogDownload extends Controller {
 		$this->data['heading_title'] = $this->language->get('heading_title');
 
 		$this->data['text_no_results'] = $this->language->get('text_no_results');
+		$this->data['text_confirm'] = $this->language->get('text_confirm');
 
 		$this->data['column_name'] = $this->language->get('column_name');
 		$this->data['column_remaining'] = $this->language->get('column_remaining');
@@ -470,7 +472,8 @@ class ControllerCatalogDownload extends Controller {
 				// Allowed file extension types
 				$allowed = array();
 				
-				$filetypes = explode("\n", $this->config->get('config_file_extension_allowed'));
+				$extension_allowed = preg_replace('~\r?\n~', "\n", $this->config->get('config_file_extension_allowed'));
+				$filetypes = explode("\n", $extension_allowed);
 				
 				foreach ($filetypes as $filetype) {
 					$allowed[] = trim($filetype);
@@ -483,7 +486,8 @@ class ControllerCatalogDownload extends Controller {
 				// Allowed file mime types		
 				$allowed = array();
 				
-				$filetypes = explode("\n", $this->config->get('config_file_mime_allowed'));
+				$mime_allowed = preg_replace('~\r?\n~', "\n", $this->config->get('config_file_mime_allowed'));
+				$filetypes = explode("\n", $mime_allowed);
 				
 				foreach ($filetypes as $filetype) {
 					$allowed[] = trim($filetype);
