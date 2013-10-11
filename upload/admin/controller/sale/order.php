@@ -1175,7 +1175,7 @@ class ControllerSaleOrder extends Controller {
 		
 		$country_info = $this->model_localisation_country->getCountry($this->request->post['payment_country_id']);
 	
-		if ($country_info && $country_info['postcode_required'] && (utf8_strlen($this->request->post['payment_postcode']) < 2) || (utf8_strlen($this->request->post['payment_postcode']) > 10)) {
+		if ($country_info && $country_info['postcode_required'] && (utf8_strlen($this->request->post['payment_postcode']) < 2 || utf8_strlen($this->request->post['payment_postcode']) > 10)) {
 			$this->error['payment_postcode'] = $this->language->get('error_postcode');
 		}
 
@@ -1187,13 +1187,9 @@ class ControllerSaleOrder extends Controller {
       		$this->error['payment_zone'] = $this->language->get('error_zone');
     	}	
 		
-    	if ($this->request->post['payment_method'] == '') {
-      		$this->error['payment_zone'] = $this->language->get('error_zone');
-    	}			
-		
-		if (!$this->request->post['payment_method']) {
+    	if (!isset($this->request->post['payment_method']) || $this->request->post['payment_method'] == '') {
 			$this->error['payment_method'] = $this->language->get('error_payment');
-		}	
+		}
 					
 		// Check if any products require shipping
 		$shipping = false;
@@ -1233,7 +1229,7 @@ class ControllerSaleOrder extends Controller {
 			
 			$country_info = $this->model_localisation_country->getCountry($this->request->post['shipping_country_id']);
 			
-			if ($country_info && $country_info['postcode_required'] && (utf8_strlen($this->request->post['shipping_postcode']) < 2) || (utf8_strlen($this->request->post['shipping_postcode']) > 10)) {
+			if ($country_info && $country_info['postcode_required'] && (utf8_strlen($this->request->post['shipping_postcode']) < 2 || utf8_strlen($this->request->post['shipping_postcode']) > 10)) {
 				$this->error['shipping_postcode'] = $this->language->get('error_postcode');
 			}
 	

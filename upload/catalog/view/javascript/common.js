@@ -1,10 +1,10 @@
 $(document).ready(function() {
     /* Search */
-    $('.button-search').on('click', function() {
+    $('header input[name=\'search\']').parent().find('button').on('click', function() {
         url = $('base').attr('href') + 'index.php?route=product/search';
-                 
-        var search = $('input[name=\'search\']').prop('value');
         
+		var search = $('header input[name=\'search\']').val();
+		         
         if (search) {
             url += '&search=' + encodeURIComponent(search);
         }
@@ -12,70 +12,58 @@ $(document).ready(function() {
         location = url;
     });
 
-    $('#search input[name=\'search\']').keydown(function(e) {
+    $('header input[name=\'search\']').on('keydown', function(e) {
         if (e.keyCode == 13) {
-            url = $('base').attr('href') + 'index.php?route=product/search';
-             
-            var search = $('input[name=\'search\']').prop('value');
-            
-            if (search) {
-                url += '&search=' + encodeURIComponent(search);
-            }
-            
-            location = url;
+            $('header input[name=\'search\']').parent().find('button').trigger('click');
         }
     });
 
-    // Navigation - Columns
-    $('.main-navbar .dropdown-menu').each(function(){
-
-        var menu = $('.main-navbar').offset();
-        var dropdown = $(this).parent().offset();
-
-        var i = (dropdown.left + $(this).outerWidth()) - (menu.left + $('.main-navbar').outerWidth());
-
-        if (i > 0) {
-            $(this).css('margin-left', '-' + (i + 5) + 'px');
-        }
-
-    });
-
-    // every 3 product-thumbs gets put into .row div
-    $('.layout-row-3').each(function(){
-
-        var divs = $(this).children();
-        for(var i = 0; i < divs.length; i+=3) {
-          divs.slice(i, i+3).wrapAll("<div class='row'></div>");
-        }
-
-    });
-
-    // every 4 product-thumbs gets put into .row div
-    $('.layout-row-4').each(function(){
-
-        var divs = $(this).children();
-        for(var i = 0; i < divs.length; i+=4) {
-          divs.slice(i, i+4).wrapAll("<div class='row'></div>");
-        }
-
-    });
-    
-    // change product-grid to product-list
-    $('#list-view').click(function() {
-        $('.product-grid').removeClass('product-grid').addClass('product-list');
-        $('.product-thumb').addClass('clearfix');
-
-    });
-    // change product-list to product-grid
-    $('#grid-view').click(function() {
-        $('.product-list').removeClass('product-list').addClass('product-grid');
-        $('.product-thumb').removeClass('clearfix');
-    });
-
-    // tooltips on hover
-
-
-   $('[data-toggle=\'tooltip\']').tooltip();
+	// Navigation - Columns
+	$('.main-navbar .dropdown-menu').each(function(){
+		var menu = $('.main-navbar').offset();
+		var dropdown = $(this).parent().offset();
+		
+		var i = (dropdown.left + $(this).outerWidth()) - (menu.left + $('.main-navbar').outerWidth());
+		
+		if (i > 0) {
+			$(this).css('margin-left', '-' + (i + 5) + 'px');
+		}
+	});
+	
+	// every 3 product-thumbs gets put into .row div
+	$('.layout-row-3').each(function(){
+		var divs = $(this).children();
+		
+		for (var i = 0; i < divs.length; i+=3) {
+			divs.slice(i, i+3).wrapAll('<div class="row"></div>');
+		}
+	});
+	
+	// every 4 product-thumbs gets put into .row div
+	$('.layout-row-4').each(function(){
+		var divs = $(this).children();
+		
+		for (var i = 0; i < divs.length; i += 4) {
+			divs.slice(i, i+4).wrapAll("<div class='row'></div>");
+		}
+	});
+	
+	// change product-grid to product-list
+	$('#list-view').click(function() {
+		$('.product-grid').removeClass('product-grid').addClass('product-list');
+		
+		$('.product-thumb').addClass('clearfix');
+	});
+	
+	// change product-list to product-grid
+	$('#grid-view').click(function() {
+		$('.product-list').removeClass('product-list').addClass('product-grid');
+		
+		$('.product-thumb').removeClass('clearfix');
+	});
+	
+	// tooltips on hover
+	$('[data-toggle=\'tooltip\']').tooltip({container: 'body'});
 });
 
 function getURLVar(key) {
@@ -195,7 +183,7 @@ $(document).delegate('.agree', 'click', function(event) {
 			
 			$('body').append(html);
 			
-			$('#modal-agree').modal('show')
+			$('#modal-agree').modal('show');
         }
     });
 });
@@ -310,7 +298,6 @@ $(document).delegate('.agree', 'click', function(event) {
 			}
 			
 			$(this.element).siblings('ul.dropdown-menu').html(html);
-
 		}
 	};
 
@@ -326,3 +313,61 @@ $(document).delegate('.agree', 'click', function(event) {
 		});	
 	}
 })(window.jQuery);
+
+// AJAX Form Submission
+$(document).delegate('.test', 'submit', function(e) {
+	e.preventDefault();
+	
+	//alert($(e.currentTarget).html());
+	//alert($(e.target).html());
+	
+	//alert($(this).attr('formaction'));
+	
+	var node = this;
+	
+	$.ajax({
+		url: $(this).attr('action'),
+		type: 'post',
+		data: new FormData($(this)[0]),
+		dataType: 'html',
+		cache: false,
+		contentType: false,
+		processData: false,		
+        beforeSend: function() {
+        	$(node).find('input[type=\'submit\']').button('loading');
+		},  
+        complete: function() {
+			$(node).find('input[type=\'submit\']').button('reset');
+        },
+		success: function(json) {
+			alert(json);
+			$('.alert, .text-danger').remove();
+			
+			$('.has-error').removeClass('has-error');
+						
+			if (json['error']) {
+				if (json['error']['warning']) {
+					$('#content').prepend('<div class="alert alert-danger"><i class="icon-exclamation-sign"></i> ' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+				}
+				
+				for (i in json['error']) {
+					$('#input-' + i.replace('_', '-')).parent().parent().addClass('has-error');
+				
+					$('#input-' + i.replace('_', '-')).after('<div class="text-danger">' + json['error'][i] + '</div>');
+				}				
+			}
+						
+			if (json['success']) {
+				$('#content').prepend('<div class="alert alert-success"><i class="icon-ok-sign"></i> ' + json['success'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+			}
+			
+			if (json['redirect']) {
+				location = json['redirect'];
+				//stop
+			}
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+});
