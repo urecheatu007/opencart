@@ -1,28 +1,19 @@
 <?php echo $header; ?>
 <div class="container">
-<ul class="breadcrumb">
-  <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-  <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
-  <?php } ?>
-</ul>
-<div class="row">
-<?php echo $column_left; ?>
-<?php if ($column_left) { ?>
-<div class="span9">
-<?php } elseif ($column_right) { ?>
-<div class="span9">
-<?php } else { ?>
-<div class="span12">
-<?php } ?>
-<?php echo $content_top; ?>
-<div class="row">
-<?php if ($column_left) { ?>
-<div class="span6">
-  <?php } elseif ($column_right) { ?>
-  <div class="span6">
+  <ul class="breadcrumb">
+    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
+    <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+    <?php } ?>
+  </ul>
+  <div class="row"><?php echo $column_left; ?>
+    <?php if ($column_left && $column_right) { ?>
+    <?php $cols = 6; ?>
+    <?php } elseif ($column_left || $column_right) { ?>
+    <?php $cols = 9; ?>
     <?php } else { ?>
-    <div class="span8">
-      <?php } ?>
+    <?php $cols = 12; ?>
+    <?php } ?>
+    <div id="content" class="col-sm-<?php echo $cols; ?>"><?php echo $content_top; ?> 
       
       <!-- Product image -->
       
@@ -40,7 +31,6 @@
       <?php } ?>
       
       <!-- Tabs -->
-      <div class="tabbable"> 
         
         <!-- The Tabs -->
         <ul class="nav nav-tabs">
@@ -130,6 +120,9 @@
         </div>
       </div>
     </div>
+    
+    
+    
     <?php if ($column_left) { ?>
     <div class="span3 product-info">
       <?php } elseif ($column_right) { ?>
@@ -139,7 +132,7 @@
           <?php } ?>
           
           <!-- Wishlist / Compare buttons -->
-          <div class="btn-group"> <a data-toggle="tooltip" class="btn square tooltip-item" title="<?php echo $button_wishlist; ?>" onclick="addToWishList('<?php echo $product_id; ?>');"><i class="icon-heart"></i></a> <a data-toggle="tooltip" class="btn square tooltip-item" title="<?php echo $button_compare; ?>" onclick="addToCompare('<?php echo $product_id; ?>');"><i class="icon-exchange"></i></a> </div>
+          <div class="btn-group"> <a data-toggle="tooltip" class="btn" title="<?php echo $button_wishlist; ?>" onclick="addToWishList('<?php echo $product_id; ?>');"><i class="icon-heart"></i></a> <a data-toggle="tooltip" class="btn" title="<?php echo $button_compare; ?>" onclick="addToCompare('<?php echo $product_id; ?>');"><i class="icon-exchange"></i></a> </div>
           
           <!-- Product Name -->
           <h1><?php echo $heading_title; ?></h1>
@@ -192,15 +185,18 @@
           <?php if ($options) { ?>
           <hr>
           <h3><?php echo $text_option; ?></h3>
+          
+          
           <?php foreach ($options as $option) { ?>
           <?php if ($option['type'] == 'select') { ?>
+          
           <div class="form-group">
             <ul class="unstyled option" id="option-<?php echo $option['product_option_id']; ?>">
               <li>
                 <?php if ($option['required']) { ?>
                 <div class="text-danger">*</div>
                 <?php } ?>
-                <?php echo $option['name']; ?> </li>
+                <?php echo $option['name']; ?></li>
               <li>
                 <select class="input-block-level" name="option[<?php echo $option['product_option_id']; ?>]">
                   <option value=""><?php echo $text_select; ?></option>
@@ -215,15 +211,20 @@
               </li>
             </ul>
           </div>
+          
+          
           <?php } ?>
+          
+          
           <?php if ($option['type'] == 'radio') { ?>
+          
           <div class="form-group">
             <ul class="unstyled option" id="option-<?php echo $option['product_option_id']; ?>">
               <li>
                 <?php if ($option['required']) { ?>
                 <div class="text-danger">*</div>
                 <?php } ?>
-                <?php echo $option['name']; ?> </li>
+                <?php echo $option['name']; ?></li>
               <?php foreach ($option['option_value'] as $option_value) { ?>
               <li>
                 <label class="radio" for="option-value-<?php echo $option_value['product_option_value_id']; ?>"><?php echo $option_value['name']; ?>
@@ -236,7 +237,13 @@
               <?php } ?>
             </ul>
           </div>
+          
+          
           <?php } ?>
+          
+          
+          
+          
           <?php if ($option['type'] == 'checkbox') { ?>
           <div class="form-group">
             <ul class="unstyled option" id="option-<?php echo $option['product_option_id']; ?>">
@@ -355,6 +362,8 @@
           <?php } ?>
           <?php } ?>
           
+          
+          
           <!-- Cart -->
           <ul class="unstyled cart">
             <li><?php echo $text_qty; ?></li>
@@ -417,7 +426,7 @@
               <img src="catalog/view/theme/default/image/stars-<?php echo $product['rating']; ?>.png" alt="<?php echo $product['reviews']; ?>" />
               <?php } ?>
             </div>
-            <div class="button-group"> <a class="add-to-cart" onclick="addToCart('<?php echo $product['product_id']; ?>');"> <span class="hidden-tablet"><?php echo $button_cart; ?></span><span><i class="icon-shopping-cart visible-tablet"></i></span> </a> <a data-toggle="tooltip" class="tooltip-item" title="<?php echo $button_wishlist; ?>" onclick="addToWishList('<?php echo $product['product_id']; ?>');"><i class="icon-heart"></i></a> <a data-toggle="tooltip" class="tooltip-item" title="<?php echo $button_compare; ?>" onclick="addToCompare('<?php echo $product['product_id']; ?>');"><i class="icon-exchange"></i></a>
+            <div class="button-group"> <a class="add-to-cart" onclick="addToCart('<?php echo $product['product_id']; ?>');"> <span class="hidden-tablet"><?php echo $button_cart; ?></span><span><i class="icon-shopping-cart visible-tablet"></i></span> </a> <a data-toggle="tooltip" title="<?php echo $button_wishlist; ?>" onclick="addToWishList('<?php echo $product['product_id']; ?>');"><i class="icon-heart"></i></a> <a data-toggle="tooltip" title="<?php echo $button_compare; ?>" onclick="addToCompare('<?php echo $product['product_id']; ?>');"><i class="icon-exchange"></i></a>
               <div class="clearfix"></div>
             </div>
           </div>
@@ -438,10 +447,12 @@
         <?php } ?>
       </div>
       <?php } ?>
-      <?php echo $content_bottom; ?> </div>
-    <!-- /span12 or /span9 --> 
-    
-    <?php echo $column_right; ?> </div>
+      
+      
+      
+      
+      <?php echo $content_bottom; ?></div>
+    <?php echo $column_right; ?></div>
 </div>
 <script type="text/javascript"><!--
 $('#button-cart').click(function() {
@@ -489,7 +500,7 @@ new AjaxUpload('#button-option-<?php echo $option['product_option_id']; ?>', {
     onComplete: function(file, json) {
         $('#button-option-<?php echo $option['product_option_id']; ?>').prop('disabled', false);
         
-        $('.alert-error').remove();
+        $('.text-danger').remove();
         
         if (json['success']) {
             alert(json['success']);
